@@ -20,11 +20,16 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activeadmin', '>= 1.0.0.pre1'
   gem.add_dependency 'uber', '0.0.15'
-  gem.add_development_dependency 'rails', '~> 4.2'
+
+  gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'capybara'
-  gem.add_development_dependency 'rspec-rails', '~> 3.3'
-  gem.add_development_dependency 'phantomjs'
-  gem.add_development_dependency 'poltergeist'
   gem.add_development_dependency 'database_cleaner'
   gem.add_development_dependency 'launchy'
+  gem.add_development_dependency 'phantomjs'
+  gem.add_development_dependency 'poltergeist'
+  gem.add_development_dependency 'rails', '~> 4.2', '< 6.0'
+  gem.add_development_dependency 'rspec-rails', '~> 3.3'
+  gem.add_development_dependency 'sprockets', '< 4'
+  gem.add_development_dependency 'sqlite3'
+  gem.add_development_dependency 'appraisal', '2.1.0'
 end
