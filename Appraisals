@@ -1,48 +1,52 @@
 require 'yaml'
 
+ruby_versions = %w(2.5.7 2.6.5)
+
 matrix = [
   {
-    rails_version: '4.2.11.1',
-    ruby_versions: %w[2.5.7 2.6.5],
-    bundler_version: '1.17.3',
+    rails_version: '~> 4.2',
+    activeadmin_versions: ['1.4.3'],
+    sqlite_version: '< 1.4'
   },
   {
-    rails_version: '5.2.3',
-    ruby_versions: %w[2.5.7 2.6.5],
-    bundler_version: '1.17.3'
+    rails_version: '~> 5.2.3',
+    activeadmin_versions: %w(2.3.1 2.4.0),
+    sqlite_version: '< 1.4'
   },
   {
-    rails_version: '6.0',
-    ruby_versions: %w[2.5.7 2.6.5],
-    bundler_version: '1.17.3'
+    rails_version: '~> 6.0.0',
+    activeadmin_versions: %w(2.3.1 2.4.0),
+    sqlite_version: '>= 1.4'
   },
 ]
 
-matrix.each do |rails_version:, **|
-  appraise "rails_#{rails_version}" do
-    gem 'rails', "~> #{rails_version}"
-    gem 'sqlite3', '< 1.4'
+matrix.each do |rails_version:, activeadmin_versions:, sqlite_version:|
+  activeadmin_versions.each do |activeadmin_version|
+    appraise "rails_#{rails_version}_activeadmin_#{activeadmin_version}" do
+      gem 'rails', "#{rails_version}"
+      gem 'activeadmin', "#{activeadmin_version}"
+      gem 'sqlite3', "#{sqlite_version}"
+    end
   end
 end
 
 travis = ::YAML.dump(
   'language' => 'ruby',
   'matrix' => {
-    'include' =>
-      matrix.flat_map do |rails_version:, ruby_versions:, bundler_version:, **|
-        ruby_versions.map do |ruby_version|
-          {
-            'rvm' => ruby_version,
-            'gemfile' => "gemfiles/rails_#{rails_version}.gemfile",
-            'env' => "BUNDLER_VERSION=#{bundler_version} RAILS_ENV=test",
-          }
-        end
-      end,
+    'include' => ruby_versions.flat_map do |ruby_version|
+      Dir['gemfiles/*.gemfile'].map do |gemfile_name|
+        {
+          'rvm' => ruby_version,
+          'gemfile' => gemfile_name
+        }
+      end
+    end
   },
   'before_install' => [
     'gem uninstall -i $(rvm gemdir)@global -ax bundler || true',
-    'gem install bundler -v "$BUNDLER_VERSION"',
+    'gem install bundler -v 1.17.3',
   ],
+  'env' => 'RAILS_ENV=test',
   'install' => 'bundle install --retry=3',
   'script' => [
     'bundle exec rake dummy:prepare',

@@ -31,7 +31,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activeadmin (2.4.0)
+    activeadmin (2.3.1)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
       formtastic_i18n (~> 0.4)
@@ -89,6 +89,7 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     cliver (0.3.2)
+    coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -158,6 +159,9 @@ GEM
     polyamorous (2.3.0)
       activerecord (>= 5.0)
     powerpack (0.1.2)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (4.0.1)
     puma (4.2.1)
       nio4r (~> 2.0)
@@ -261,7 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeadmin
+  activeadmin (= 2.3.1)
   activeadmin_sortable_table!
   acts_as_list
   appraisal (= 2.1.0)
@@ -272,11 +276,12 @@ DEPENDENCIES
   launchy
   phantomjs
   poltergeist
+  pry
   puma
   rails (~> 5.2.3)
   rspec-rails (~> 3.3)
   rubocop (= 0.34.2)
-  sprockets (< 4)
+  sprockets
   sqlite3 (< 1.4)
 
 BUNDLED WITH
