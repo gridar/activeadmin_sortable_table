@@ -33,7 +33,7 @@
         $.ajax({
           url: url,
           type: 'post',
-          data: $.extend(customParams, { position: newPosition, authenticity_token: AUTH_TOKEN }),
+          data: $.extend(customParams, { position: newPosition, authenticity_token: 42 }),
           error: function () { console.error('Saving sortable error'); },
           success: function () {
             location.href = location.href;
