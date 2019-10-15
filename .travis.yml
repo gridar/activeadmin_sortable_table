@@ -1,29 +1,36 @@
-sudo: false
+---
 language: ruby
-
-rvm:
-  - 2.3.7
-  - 2.4.4
-  - 2.5.1
-
-env:
-  matrix:
-    - RAILS_VERSION=4.2.10
-    - RAILS_VERSION=5.2.1
-
 matrix:
-  allow_failures:
-    - rvm: ruby-head
-  fast_finish: true
-
-before_install: gem update --remote bundler
-install:
-  - bundle install --retry=3
+  include:
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails____6.0.0_activeadmin_2.4.0.gemfile
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails____6.0.0_activeadmin_2.3.1.gemfile
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails____5.2.3_activeadmin_2.3.1.gemfile
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails____4.2_activeadmin_1.4.3.gemfile
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails____5.2.3_activeadmin_2.4.0.gemfile
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails____6.0.0_activeadmin_2.4.0.gemfile
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails____6.0.0_activeadmin_2.3.1.gemfile
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails____5.2.3_activeadmin_2.3.1.gemfile
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails____4.2_activeadmin_1.4.3.gemfile
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails____5.2.3_activeadmin_2.4.0.gemfile
+before_install:
+- gem uninstall -i $(rvm gemdir)@global -ax bundler || true
+- gem install bundler -v 1.17.3
+env: RAILS_ENV=test
+install: bundle install --retry=3
 script:
-  - bundle exec rake dummy:prepare
-  - bundle exec rspec
-  - bundle exec rubocop
-
+- bundle exec rake dummy:prepare
+- bundle exec rspec
+- bundle exec rubocop
 addons:
   code_climate:
-    repo_token: 085c9fc58ac3efcd9a8b311ee77bcec0b5c048575cde8a2234f7c63550910969
+    repo_token: '085c9fc58ac3efcd9a8b311ee77bcec0b5c048575cde8a2234f7c63550910969'
