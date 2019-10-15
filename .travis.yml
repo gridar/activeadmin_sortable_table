@@ -2,23 +2,23 @@
 language: ruby
 matrix:
   include:
-  - rvm: 2.4.9
-    gemfile: gemfiles/rails_4.2.11.1.gemfile
-    env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
   - rvm: 2.5.7
     gemfile: gemfiles/rails_4.2.11.1.gemfile
     env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
   - rvm: 2.6.5
     gemfile: gemfiles/rails_4.2.11.1.gemfile
     env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
-  - rvm: 2.4.9
-    gemfile: gemfiles/rails_5.2.3.gemfile
-    env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
   - rvm: 2.5.7
     gemfile: gemfiles/rails_5.2.3.gemfile
     env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
   - rvm: 2.6.5
     gemfile: gemfiles/rails_5.2.3.gemfile
+    env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
+  - rvm: 2.5.7
+    gemfile: gemfiles/rails_6.0.gemfile
+    env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
+  - rvm: 2.6.5
+    gemfile: gemfiles/rails_6.0.gemfile
     env: BUNDLER_VERSION=1.17.3 RAILS_ENV=test
 before_install:
 - gem uninstall -i $(rvm gemdir)@global -ax bundler || true

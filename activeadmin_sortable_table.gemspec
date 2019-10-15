@@ -30,6 +30,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rails', '~> 4.2', '< 6.0'
   gem.add_development_dependency 'rspec-rails', '~> 3.3'
   gem.add_development_dependency 'sprockets', '< 4'
-  gem.add_development_dependency 'sqlite3'
+  gem.add_development_dependency 'sqlite3', '< 1.4'
   gem.add_development_dependency 'appraisal', '2.1.0'
 end

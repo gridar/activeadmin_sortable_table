@@ -3,25 +3,25 @@ require 'yaml'
 matrix = [
   {
     rails_version: '4.2.11.1',
-    ruby_versions: %w[2.4.9 2.5.7 2.6.5],
-    sqlite3_version: '< 1.4',
+    ruby_versions: %w[2.5.7 2.6.5],
     bundler_version: '1.17.3',
   },
   {
     rails_version: '5.2.3',
-    ruby_versions: %w[2.4.9 2.5.7 2.6.5],
-    sqlite3_version: '< 1.4',
+    ruby_versions: %w[2.5.7 2.6.5],
+    bundler_version: '1.17.3'
+  },
+  {
+    rails_version: '6.0',
+    ruby_versions: %w[2.5.7 2.6.5],
     bundler_version: '1.17.3'
   },
 ]
 
-matrix.each do |gemfile|
-  rails_version = gemfile.fetch(:rails_version)
-  sqlite3_version = gemfile.fetch(:sqlite3_version)
-
+matrix.each do |rails_version:, **|
   appraise "rails_#{rails_version}" do
     gem 'rails', "~> #{rails_version}"
-    gem 'sqlite3', sqlite3_version
+    gem 'sqlite3', '< 1.4'
   end
 end
 
