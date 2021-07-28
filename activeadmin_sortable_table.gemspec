@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'activeadmin', '>= 1.0.0.pre1'
-  gem.add_dependency 'uber', '0.0.15'
+  gem.add_dependency 'uber', '>= 0.1.0'
 
   gem.add_development_dependency 'appraisal', '2.1.0'
   gem.add_development_dependency 'bundler'
